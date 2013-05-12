@@ -1,9 +1,21 @@
 var mongoose = require('mongoose'),
 
-  TodoSchema = new mongoose.Schema({
-    title: { 'type': String, 'default': 'empty todo...' },
-    order: { 'type': Number },
-    done: { 'type': Boolean, 'default': false }
+  GlossSchema = new mongoose.Schema({
+      word: { 'type': String, 'default': null }
+    , definition: { 'type': String, 'default': null }
   });
 
-module.exports = mongoose.model('Todo', TodoSchema);
+module.exports = mongoose.model('Todo', GlossSchema);
+
+GlossSchema.statics = {
+
+  findByRegex: function (wordArray, cb) {
+    var q = { word: { $in: [] } };
+    for (var i = wordArray.length - 1; i >= 0; i--) {
+      var regex = new RegExp(wordArray[i], 'i')
+      q.word['$in'].push(regex)
+    };
+    this.find( q )
+      .exec(cb)
+  }
+}

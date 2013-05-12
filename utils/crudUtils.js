@@ -28,6 +28,31 @@
   }
 
   //------------------------------
+  // Search word array
+  //
+  function searchWordArray(model) {
+    return function (req, res) {
+      console.log('list', req.body);
+      
+      //This checks whether the client even sent anything at all and if it did assigns it
+      if (req.body.wordArray != undefined) {
+        var wordArray = req.body.wordArray; 
+      } else {
+        res.send(JSON.stringify({'result': null, 'status': 400, 'message': 'no input array'}))
+        return;
+      }
+      
+      model.findByRegex(wordArray, function (err, result) {
+        if (!err) {
+          res.send(result);
+        } else {
+          res.send(errMsg(err));
+        }
+      });
+    };
+  }
+
+  //------------------------------
   // Create
   //
   function getCreateController(model) {
@@ -120,6 +145,7 @@
 
     app.get(path, getListController(model));
     app.post(path, getCreateController(model));
+    app.post('/search', searchWordArray(model));
     app.get(pathWithId, getReadController(model));
     app.put(pathWithId, getUpdateController(model));
     app.del(pathWithId, getDeleteController(model));
