@@ -32,8 +32,8 @@
   //
   function searchWordArray(model) {
     return function (req, res) {
-      var callback;
-      callback=req.param("callback")? req.param("callback"):"";
+      var callback = req.param("callback") ? req.param("callback") : "";
+
       //This checks whether the client even sent anything at all and if it did assigns it
       if (req.body.wordArray != undefined) {
         var wordArray = req.body.wordArray; 
@@ -41,7 +41,8 @@
         res.send(JSON.stringify({'result': null, 'status': 400, 'message': 'no input array'}))
         return;
       }
-      model.findByRegex(wordArray, function (err, result) {
+
+      model.findByRegex( wordArray, function (err, result) {
         if (!err) {
           res.send( callback+"("+JSON.stringify(result)+")" );
         } else {
