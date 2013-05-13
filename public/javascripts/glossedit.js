@@ -111,14 +111,14 @@ $(function ($, _, Backbone) {
 
     // Add a single todo item to the list by creating a view for it, and
     // appending its element to the `<ul>`.
-    addOne: function (todo) {
-      var view = new TodoView({model: todo});
-      $("#todo-list").append(view.render().el);
+    addOne: function (defin) {
+      var view = new DefinView({model: todo});
+      $("#defin-list").append(view.render().el);
     },
 
     // Add all items in the **Todos** collection at once.
     addAll: function () {
-      Todos.each(this.addOne);
+      Defins.each(this.addOne);
     }
   });
 
