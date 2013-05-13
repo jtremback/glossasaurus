@@ -70,7 +70,7 @@ $(function ($, _, Backbone) {
 
     // The DOM events specific to an item.
     events: {
-      "click *"   : "toggleDone"
+      "click *" : "toggleDone"
     },
 
     // The DefinView listens for changes to its model, re-rendering. Since there's
