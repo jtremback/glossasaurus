@@ -5,7 +5,6 @@ var mongoose = require('mongoose'),
     , definition: { 'type': String, 'default': null }
   });
 
-module.exports = mongoose.model('Todo', GlossSchema);
 
 GlossSchema.statics = {
 
@@ -19,3 +18,4 @@ GlossSchema.statics = {
       .exec(cb)
   }
 }
+module.exports = mongoose.model('Todo', GlossSchema);

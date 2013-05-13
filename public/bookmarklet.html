@@ -1,36 +1,10 @@
 <script type="text/javascript">
-(function(){
-
-// avoid the bookmarklet activating more than once
-if (window.MyNamespace) {
-    return;
-}
-window.MyNamespace = { };
-
-var version = 1,
-    script  = document.createElement('script');
-
-script.setAttribute('type', 'text/javascript');
-script.setAttribute('charset', 'UTF-8');
-script.setAttribute('src', 'http://localhost:3000/javascripts/bookmarklet.js');
-document.documentElement.appendChild(script);
-
-script.onload = script.onreadystatechange = function() {
-    var rs = script.readyState;
-    if (!rs || rs === 'loaded' || rs === 'complete') {
-        script.onload = script.onreadystatechange = null;
-
-        // initialise or warn if older version
-        if (version !== window.MyNamespace.version) {
-            alert('This bookmarklet is out of date!');
-        } else {
-            window.MyNamespace.init();
-        }
-    }
-};
-
-}());
 </script>
 
 
-<a href="javascript:(function(){if(window.MyNamespace){return}window.MyNamespace={};var e=1,t=document.createElement("script");t.setAttribute("type","text/javascript");t.setAttribute("charset","UTF-8");t.setAttribute("src","http://localhost:3000/javascripts/bookmarklet.js");document.documentElement.appendChild(t);t.onload=t.onreadystatechange=function(){var n=t.readyState;if(!n||n==="loaded"||n==="complete"){t.onload=t.onreadystatechange=null;if(e!==window.MyNamespace.version){alert("This bookmarklet is out of date!")}else{window.MyNamespace.init()}}}})()">yea</a>
+<a href="javascript:(function(){
+  _my_script=document.createElement('SCRIPT');
+  _my_script.type='text/javascript';
+  _my_script.src='http://localhost:3000/javascripts/bookmarklet.js?';
+  document.getElementsByTagName('head')[0].appendChild(_my_script);
+})();">yea</a>
