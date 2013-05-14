@@ -34,7 +34,6 @@
     return function (req, res) {
       var callback = req.param("callback") ? req.param("callback") : "";
 
-      console.log(req.param("wordArray"))
       //This checks whether the client even sent anything at all and if it did assigns it
       if (req.param("wordArray") != undefined) {
         var wordArray = req.param("wordArray"); 
@@ -45,6 +44,9 @@
 
 
       model.findByRegex( wordArray, function (err, result) {
+
+          console.log(result)
+
         if (!err) {
           res.send( callback+"("+JSON.stringify(result)+")" );
         } else {

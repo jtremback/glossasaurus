@@ -133,7 +133,7 @@ $(function ($, _, Backbone) {
     createOnEnter: function (e) {
       if (e.keyCode !== 13 && e.type!="click") { return; }
       if (!this.inputDef.val() || !this.inputTerm.val()) { return; }
-      Defins.create({term: this.inputTerm.val(),definition: this.inputDef.val()});
+      Defins.create({term: this.inputTerm.val().toLowerCase(),definition: this.inputDef.val()});
       this.inputDef.val('');
       this.inputTerm.val('');
     },
