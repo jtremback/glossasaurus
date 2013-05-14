@@ -9,11 +9,12 @@ var mongoose = require('mongoose'),
 GlossSchema.statics = {
 
   findByRegex: function (wordArray, cb) {
-    var q = { word: { $in: [] } };
+    var q = { term: { $in: [] } };
     for (var i = wordArray.length - 1; i >= 0; i--) {
       var regex = new RegExp(wordArray[i], 'i')
-      q.word['$in'].push(regex)
+      q.term['$in'].push(regex)
     };
+    console.log(q)
     this.find( q )
       .exec(cb)
   }
