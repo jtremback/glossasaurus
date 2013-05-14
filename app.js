@@ -23,7 +23,7 @@ app.configure('development', function () {
 
 routes.init(app);
 
-var port = process.env.VCAP_APP_PORT || 3000;
+var port = process.env.VCAP_APP_PORT || 8888;
 
 if(process.env.VCAP_SERVICES){
   var services = JSON.parse(process.env.VCAP_SERVICES);
