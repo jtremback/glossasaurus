@@ -65,14 +65,18 @@ $(function ($, _, Backbone) {
   DefinView = Backbone.View.extend({
 
     //... is a list tag.
-    tagName:  "li",
+    tagName:  "div",
 
     // Cache the template function for a single definition.
     template: _.template($('#defin-template').html()),
 
     // The DOM events specific to an item.
     events: {
-      "click *" : "toggleDone"
+      "click .destroy": "clear"
+    },
+    clear:function(){
+      this.model.destroy();
+      this.remove();
     },
 
     // The DefinView listens for changes to its model, re-rendering. Since there's
@@ -103,11 +107,18 @@ $(function ($, _, Backbone) {
 
     // Delegated events for creating new items, and clearing completed ones.
     events: {
-      "keypress .whatevs": "createOnEnter"
+      "keypress .term": "createOnEnter",
+      "keypress .def": "createOnEnter",
+      "click .submit": "createOnEnter",
+
+
+
     },
 
     initialize: function () {
-      this.input = this.$(".whatevs");
+      this.inputDef = this.$(".def");
+      this.inputTerm = this.$(".term");
+
       Defins.bind('add', this.addOne, this);
       Defins.bind('reset', this.addAll, this);
       Defins.bind('all', this.render, this);
@@ -120,19 +131,18 @@ $(function ($, _, Backbone) {
 
     // If you hit return in the main input field, create new **Todo** model
     createOnEnter: function (e) {
-      if (e.keyCode !== 13) { return; }
-      if (!this.input.val()) { return; }
-
-      Defins.create({term: this.input.val()});
-      this.input.val('');
+      if (e.keyCode !== 13 && e.type!="click") { return; }
+      if (!this.inputDef.val() || !this.inputTerm.val()) { return; }
+      Defins.create({term: this.inputTerm.val(),definition: this.inputDef.val()});
+      this.inputDef.val('');
+      this.inputTerm.val('');
     },
 
     // Add a single todo item to the list by creating a view for it, and
     // appending its element to the `<ul>`.
     addOne: function (defin) {
       var view = new DefinView({model: defin});
-      $("#defin-list").append(view.render().el);
-      
+      $("#defin-list").append(view.render().el);   
     },
 
     // Add all items in the **Todos** collection at once.

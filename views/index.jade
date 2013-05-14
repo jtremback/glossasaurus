@@ -5,13 +5,24 @@ block styles
     link(rel='stylesheet', href='/stylesheets/todos.css')
 
 block content
+  .logo
+   h1 Glossasaurus
+   img(src="images/logo.jpg", width="250px")
   #glossapp
-    input.whatevs(type="text")
+    input.term(type="text", placeholder="term")
+    br
+    textarea.def(type="text", placeholder="definition")
+    br
+    a(class="submit", href="javascript:null") Sumbit
+    |&nbsp;&nbsp;
+    a(href="/bookmarklet.html") Get Bookmarklet
 
     script#defin-template(type="text/template").
+      <a class="destroy" href="javascript:null">Destroy</a>
       <div class="view">
-        <div><%= term %></div>
+        <div><span class="type">term:</span> <span><%= term %></span></div>
+        <div><span class="type">definition:</span> <span><%= definition %></span></div>
       </div>
   #defin-list
-
+  footer
 block bodyscripts
