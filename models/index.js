@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
 
   GlossSchema = new mongoose.Schema({
-      word: { 'type': String, 'default': null }
+      term: { 'type': String, 'default': null }
     , definition: { 'type': String, 'default': null }
   });
 

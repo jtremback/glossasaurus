@@ -57,8 +57,9 @@
   //
   function getCreateController(model) {
     return function (req, res) {
-      //console.log('create', req.body);
       var m = new model(req.body);
+      console.log('create', m);
+
       m.save(function (err) {
         if (!err) {
           res.send(m);

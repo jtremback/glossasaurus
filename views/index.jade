@@ -5,14 +5,13 @@ block styles
     link(rel='stylesheet', href='/stylesheets/todos.css')
 
 block content
-
   #glossapp
+    input.whatevs(type="text")
+
+    script#defin-template(type="text/template").
+      <div class="view">
+        <div><%= term %></div>
+      </div>
+  #defin-list
 
 block bodyscripts
-
-  script#defin-template(type="text/template").
-    <div class="view">
-      <div><%= term %></div>
-    </div>
-
-  script(type="text/javascript", src="javascripts/glossedit.js")

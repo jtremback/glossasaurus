@@ -46,14 +46,16 @@ $(function ($, _, Backbone) {
     // the model is not part of a collection.
     // Note that url may also be defined as a function.
     url: function () {
-      return "/defin" + ((this.id) ? '/' + this.id : '');
-    }
+      return "/todo" + ((this.id) ? '/' + this.id : '');
+    },
+
+    
   });
 
 
 
   // Create our global collection of **Defins**.
-  Defins = new DefinList();
+  Defins=window.Defins = new DefinList();
 
 
 
@@ -101,19 +103,36 @@ $(function ($, _, Backbone) {
 
     // Delegated events for creating new items, and clearing completed ones.
     events: {
+      "keypress .whatevs": "createOnEnter"
     },
 
     initialize: function () {
+      this.input = this.$(".whatevs");
+      Defins.bind('add', this.addOne, this);
+      Defins.bind('reset', this.addAll, this);
+      Defins.bind('all', this.render, this);
+
+      Defins.fetch();
     },
 
     render: function () {
     },
 
+    // If you hit return in the main input field, create new **Todo** model
+    createOnEnter: function (e) {
+      if (e.keyCode !== 13) { return; }
+      if (!this.input.val()) { return; }
+
+      Defins.create({term: this.input.val()});
+      this.input.val('');
+    },
+
     // Add a single todo item to the list by creating a view for it, and
     // appending its element to the `<ul>`.
     addOne: function (defin) {
-      var view = new DefinView({model: todo});
+      var view = new DefinView({model: defin});
       $("#defin-list").append(view.render().el);
+      
     },
 
     // Add all items in the **Todos** collection at once.

@@ -34,7 +34,7 @@ if(dbcreds){
   console.log(dbcreds);
   mongoose.connect(dbcreds.host, dbcreds.db, dbcreds.port, {user: dbcreds.username, pass: dbcreds.password});
 }else{
-  mongoose.connect("127.0.0.1", "todomvc", 27017);
+  mongoose.connect("127.0.0.1", "glossasuarus", 27017);
 }
 
 http.createServer(app).listen(port);
